@@ -1,3 +1,8 @@
+<%@page import="com.ecommerce.entities.User"%>
+<%
+    User user1 = (User) session.getAttribute("current-user");
+%>
+
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
     <div class="container">
         <a class="navbar-brand" href="index">E-Commerce</a>
@@ -26,12 +31,24 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                <%
+                    if (user1 == null) {%>
                 <li class="nav-item active">
                     <a class="nav-link" href="login">Login </a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="register">Register</a>
+                </li> 
+                <%  } else {%>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#!"><%=user1.getUserName()%> </a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="LogoutServlet">Logout</a>
+                </li> 
+                <%    }
+                %>
+
             </ul>
 
         </div>

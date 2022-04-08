@@ -20,7 +20,8 @@
             <div class="row mt-3">
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
-                        <div class="card-header custom-bg text-white text-center">
+                        <div class="container mt-3 text-center">
+                            <img src="img/login.png" alt="Login User" width="150">
                             <h3>Login Here !!!</h3>
                         </div>
                         <div class="card-body">

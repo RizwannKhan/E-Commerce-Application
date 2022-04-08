@@ -22,7 +22,7 @@
                         <%@include file="components/message.jsp" %>
                         <div class="card-body px-4">
                             <div class="container text-center">
-                                <img src="img/add_user.png" alt="Add User" width="150">
+                                <img src="img/register-user.png" alt="Add User" width="150">
                                 <h3 class="my-3">Sign up here !!!</h3>
                             </div>
                             <form action="RegisterServlet" method="post">
@@ -54,7 +54,7 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <p>Already a member,<a href="register"> click here to Login !!!</a></p>
+                            <p>Already a member,<a href="login"> click here to Login !!!</a></p>
                         </div>
                     </div>
                 </div>

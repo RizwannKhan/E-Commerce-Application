@@ -46,5 +46,23 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>admin</servlet-name>
+        <jsp-file>/admin.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>normal</servlet-name>
+        <jsp-file>/normal.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>normal</servlet-name>
+        <url-pattern>/normal</url-pattern>
+    </servlet-mapping>
+    
     
 </web-app>

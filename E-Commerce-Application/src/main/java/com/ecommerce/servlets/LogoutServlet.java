@@ -1,8 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ecommerce.servlets;
 
-import com.ecommerce.dao.UserDao;
-import com.ecommerce.entities.User;
-import com.ecommerce.helper.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,43 +17,18 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Rijwank
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
-
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
+public class LogoutServlet extends HttpServlet {
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String email = request.getParameter("user_email");
-            String password = request.getParameter("user_password");
-            
-            UserDao dao = new UserDao(FactoryProvider.getFactory());
-            User user = dao.getUserByEmailAndPassword(email, password);
-            
-//            System.out.println("User : "+ user);
-                HttpSession s = request.getSession();
-            if(user == null){
-                s.setAttribute("msg", "Invalid user email or password !!!");
-                response.sendRedirect("login");
-                return;
-            }else {
-                out.println("<h1>Welcome "+user.getUserName()+"</h1>");
-                s.setAttribute("current-user", user);
-                
-                //admin and normal user....
-                if(user.getUserType().equals("admin")){
-                    response.sendRedirect("admin");
-                }else if(user.getUserType().equals("normal")){
-                    response.sendRedirect("normal");
-                }else {
-                    out.println("We have not identified user type");
-                }
-                
-            }
-            
+            HttpSession session = request.getSession();
+            session.removeAttribute("current-user");
+            session.setAttribute("msg", "Logged out successfully");
+            response.sendRedirect("login");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
