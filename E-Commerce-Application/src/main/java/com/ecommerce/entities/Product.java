@@ -22,7 +22,7 @@ public class Product implements Serializable {
 
     private String pTitle;
 
-    @Column(length = 3000)
+    @Column(length = 5000)
     private String pDesc;
 
     private String pPic;
@@ -50,7 +50,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public Product(String pTitle, String pDesc, String pPic, int pPrice, int pDiscount, int pQuantity, Category cId) {
+    public Product(String pTitle, String pDesc, String pPic, int pPrice, int pDiscount, int pQuantity, Category category) {
         this.pTitle = pTitle;
         this.pDesc = pDesc;
         this.pPic = pPic;
