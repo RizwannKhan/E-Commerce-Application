@@ -26,3 +26,8 @@
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
+.list-group-item.active {
+    background: #1E88E5!important;
+    border-color: #1E88E5!important;
+}
+

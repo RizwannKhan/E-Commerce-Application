@@ -1,6 +1,12 @@
+<%@page import="com.ecommerce.entities.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ecommerce.helper.FactoryProvider"%>
+<%@page import="com.ecommerce.dao.CategoryDao"%>
 <%@page import="com.ecommerce.entities.User"%>
 <%
     User user1 = (User) session.getAttribute("current-user");
+    CategoryDao categoryDao = new CategoryDao(FactoryProvider.getFactory());
+    List<Category> cList = categoryDao.getCategories();
 %>
 
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
@@ -18,12 +24,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categories
-                    </a>
+                    </a>                    
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <%                        for (Category cc : cList) {
+                        %>
+                        <a class="dropdown-item" href="#"><%=cc.getcTitle()%></a>
+                        <% }%>
                     </div>
                 </li>
                 <li class="nav-item active">

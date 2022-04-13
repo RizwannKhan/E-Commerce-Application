@@ -55,7 +55,7 @@
                     </div>
                 </div>  
                 <div class="col-md-4 text-center">
-                    <!--total categorues-->
+                    <!--total categories-->
                     <div class="card">
                         <div class="card-body">
                             <div class="container">

@@ -5,7 +5,11 @@ import com.ecommerce.dao.ProductDao;
 import com.ecommerce.entities.Category;
 import com.ecommerce.entities.Product;
 import com.ecommerce.helper.FactoryProvider;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -26,7 +30,7 @@ public class ProductOperationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
 
             //This Servlet handle both operations : Add-Category and Add-Product
             String operation = request.getParameter("oparation");
@@ -66,7 +70,26 @@ public class ProductOperationServlet extends HttpServlet {
                 ProductDao pDao = new ProductDao(FactoryProvider.getFactory());
                 int pId = pDao.saveProduct(product);
 
-                session.setAttribute("msg", "Product added successfully and product id is : " + pId);
+                try {
+                    //upload pic of product...
+                    String path = request.getRealPath("products") + File.separator + pPic;
+                    System.out.println(path);
+
+                    FileOutputStream fos = new FileOutputStream(path);
+                    InputStream is = part.getInputStream();
+
+                    byte[] b = new byte[is.available()];
+                    is.read(b);
+
+                    fos.write(b);
+                    fos.flush();
+                    fos.close();
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                session.setAttribute("msg", "Product added successfully !!!");
                 response.sendRedirect("admin");
                 return;
             }
