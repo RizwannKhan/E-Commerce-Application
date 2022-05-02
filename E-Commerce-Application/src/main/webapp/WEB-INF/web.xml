@@ -64,5 +64,14 @@
         <url-pattern>/normal</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>show_products</servlet-name>
+        <jsp-file>/show_products.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>show_products</servlet-name>
+        <url-pattern>/show_products</url-pattern>
+    </servlet-mapping>
+    
     
 </web-app>

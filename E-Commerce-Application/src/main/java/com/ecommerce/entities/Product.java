@@ -123,5 +123,11 @@ public class Product implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
+    
+    //calculate price after discount
+    public int getPriceAfterDiscount() {
+        int discount = (int) ((this.getpDiscount()/100.0) * this.getpPrice());
+        return this.getpPrice() - discount;
+    }
 
 }

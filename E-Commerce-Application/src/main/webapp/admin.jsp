@@ -3,6 +3,9 @@
     Created on : 08-Apr-2022, 9:48:46 AM
     Author     : Rijwank
 --%>
+<%@page import="com.ecommerce.dao.UserDao"%>
+<%@page import="com.ecommerce.entities.Product"%>
+<%@page import="com.ecommerce.dao.ProductDao"%>
 <%@page import="com.ecommerce.entities.Category"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ecommerce.helper.FactoryProvider"%>
@@ -44,12 +47,14 @@
             <div class="row mt-3">
                 <div class="col-md-4 text-center">
                     <!--total users-->
-                    <div class="card">
+                    <div class="card" data-toggle="modal" data-target="#all-users-modal">
                         <div class="card-body">
                             <div class="container">
                                 <img src="img/all-users.png" class="img-fluid" alt="users_icon" width="150">
                             </div>
-                            <h1>123</h1>
+                            <%                                UserDao ud = new UserDao(FactoryProvider.getFactory());
+                            %>
+                            <h1><%= ud.getUsersCount()%></h1>
                             <h3 class="text-uppercase text-muted">Users</h3>
                         </div>
                     </div>
@@ -61,7 +66,10 @@
                             <div class="container">
                                 <img src="img/categories.png" class="img-fluid" alt="users_icon" width="150">
                             </div>
-                            <h1>215</h1>
+                            <%                                CategoryDao cd = new CategoryDao(FactoryProvider.getFactory());
+                                List<Category> cl = cd.getCategories();
+                            %>
+                            <h1><%= cl.size()%></h1>
                             <h3 class="text-uppercase text-muted">Categories</h3>
                         </div>
                     </div>
@@ -73,7 +81,11 @@
                             <div class="container">
                                 <img src="img/products.png" class="img-fluid" alt="users_icon" width="150">
                             </div>
-                            <h1>251</h1>
+                            <%
+                                ProductDao pd = new ProductDao(FactoryProvider.getFactory());
+                                List<Product> pl = pd.getAllProducts();
+                            %>
+                            <h1><%= pl.size()%></h1>
                             <h3 class="text-uppercase text-muted">Products</h3>
                         </div>
                     </div>
@@ -170,7 +182,7 @@
                                     List<Category> catList = catDao.getCategories();
                                 %>
                                 <select name="catId" id="" class="form-control" required>
-                                    <option disabled selected>---Select---</option>
+                                    <option disabled selected>---Select Category---</option>
                                     <% for (Category c : catList) {%>
                                     <option value="<%=c.getcId()%>"><%= c.getcTitle()%></option>
                                     <% }%>
@@ -191,5 +203,46 @@
         </div>
         <!--end product modal-->
 
+        <!--see all users modal-->
+        <div class="modal fade" id="all-users-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header custom-bg text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">All Users List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover">
+                            <thead class="bg-info text-white">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    List<User> users = ud.getAllUsers();
+                                    for(User u: users){
+                                %>
+                                <tr>
+                                    <th scope="row"><%=u.getUserId()%></th>
+                                    <td><%=u.getUserName().toUpperCase()%></td>
+                                    <td><%=u.getUserEmail()%></td>
+                                    <td><%=u.getUserPhone()%></td>
+                                    <td><%=u.getUserType().toUpperCase()%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end see all users modal-->
     </body>
 </html>

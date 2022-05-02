@@ -37,6 +37,9 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cart"> <i class="fa fa-cart-plus" style="font-size: 25px;"></i> <sup class="cart-quantity cart-items"></sup></a>
+                </li>
                 <%
                     if (user1 == null) {%>
                 <li class="nav-item active">
